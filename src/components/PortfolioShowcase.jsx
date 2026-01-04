@@ -37,7 +37,7 @@ const PortfolioShowcase = () => {
             <div className="relative z-10 bg-gradient-to-br from-dark-800 to-dark-900 rounded-3xl p-1 shadow-2xl">
               <div className="bg-dark-950 rounded-3xl overflow-hidden">
                 <img 
-                  src="/public/app-preview-2.png" 
+                  src="/app-preview-2.png" 
                   alt="Portfolio View" 
                   className="w-full h-auto "
                 />
