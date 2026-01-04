@@ -111,7 +111,7 @@ const Hero = () => {
               <div className="bg-gradient-to-br from-dark-800 to-dark-900 rounded-3xl p-1 shadow-2xl glow-effect">
                 <div className="bg-dark-900 rounded-3xl overflow-hidden">
                   <img 
-                    src="/public/app-preview-1.png" 
+                    src="/app-preview-1.png" 
                     alt="Trove App Preview" 
                     className="w-full h-auto"
                   />
