@@ -1,30 +1,48 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FiMail } from 'react-icons/fi';
-import PrivacyPolicyModal from './PrivacyPolicyModal';
-import TermsAndConditionsModal from './TermsAndConditionsModal';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FiMail } from "react-icons/fi";
+import PrivacyPolicyModal from "./PrivacyPolicyModal";
+import TermsAndConditionsModal from "./TermsAndConditionsModal";
+import ContactModal from "./ContactModal";
+import HelpCenterModal from "./HelpCenterModal"; // Add this import
 
 const Footer = () => {
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isHelpCenterModalOpen, setIsHelpCenterModalOpen] = useState(false); // Add this state
 
   const footerLinks = [
     {
-      title: 'Product',
+      title: "Product",
       links: [
-        { label: 'Features', href: '#features' },
-        { label: 'Portfolio Tracking', href: '#portfolio' },
+        { label: "Features", href: "#features" },
+        { label: "Portfolio Tracking", href: "#portfolio" },
       ],
     },
     {
-      title: 'Company',
-      links: [{ label: 'About', href: '#about' }],
+      title: "Company",
+      links: [{ label: "About", href: "#about" }],
     },
     {
-      title: 'Support',
+      title: "Support",
       links: [
-        { label: 'Help Center', href: '#' },
-        { label: 'Contact Us', href: '#contact' },
+        {
+          label: "Help Center",
+          href: "#",
+          onClick: (e) => {
+            e.preventDefault();
+            setIsHelpCenterModalOpen(true);
+          },
+        }, // Updated this link
+        {
+          label: "Contact Us",
+          href: "#contact",
+          onClick: (e) => {
+            e.preventDefault();
+            setIsContactModalOpen(true);
+          },
+        },
       ],
     },
   ];
@@ -45,9 +63,7 @@ const Footer = () => {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <span className="text-3xl font-bold text-gradient">
-                  Trove
-                </span>
+                <span className="text-3xl font-bold text-gradient">Trove</span>
               </div>
 
               <p className="text-gray-400 leading-relaxed max-w-md">
@@ -66,12 +82,21 @@ const Footer = () => {
                 <ul className="space-y-3">
                   {section.links.map((link) => (
                     <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-gray-400 hover:text-white transition-colors"
-                      >
-                        {link.label}
-                      </a>
+                      {link.onClick ? (
+                        <button
+                          onClick={link.onClick}
+                          className="text-gray-400 hover:text-white transition-colors"
+                        >
+                          {link.label}
+                        </button>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className="text-gray-400 hover:text-white transition-colors"
+                        >
+                          {link.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -132,13 +157,21 @@ const Footer = () => {
         </div>
       </footer>
 
-      <PrivacyPolicyModal 
-        isOpen={isPrivacyModalOpen} 
-        onClose={() => setIsPrivacyModalOpen(false)} 
+      <PrivacyPolicyModal
+        isOpen={isPrivacyModalOpen}
+        onClose={() => setIsPrivacyModalOpen(false)}
       />
-      <TermsAndConditionsModal 
-        isOpen={isTermsModalOpen} 
-        onClose={() => setIsTermsModalOpen(false)} 
+      <TermsAndConditionsModal
+        isOpen={isTermsModalOpen}
+        onClose={() => setIsTermsModalOpen(false)}
+      />
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+      <HelpCenterModal
+        isOpen={isHelpCenterModalOpen}
+        onClose={() => setIsHelpCenterModalOpen(false)}
       />
     </>
   );
