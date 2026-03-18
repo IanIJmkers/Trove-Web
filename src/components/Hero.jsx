@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiTrendingUp, FiStar } from 'react-icons/fi';
 import ContactModal from './ContactModal'; // Add this import
+import DownloadModal from './DownloadModal';
 
 const Hero = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false); // Add this state
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
 
   return (
     <>
@@ -63,6 +65,7 @@ const Hero = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => setIsDownloadModalOpen(true)}
                   className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg hover:shadow-primary-500/50 transition-all flex items-center justify-center gap-2"
                 >
                   <FiTrendingUp />
@@ -135,9 +138,15 @@ const Hero = () => {
       </section>
 
       {/* Contact Modal */}
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+
+      {/* Download Modal */}
+      <DownloadModal
+        isOpen={isDownloadModalOpen}
+        onClose={() => setIsDownloadModalOpen(false)}
       />
     </>
   );

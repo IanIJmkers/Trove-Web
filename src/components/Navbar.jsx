@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 import ContactModal from './ContactModal'; // Add this import
+import DownloadModal from './DownloadModal';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false); // Add this state
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,6 +77,7 @@ const Navbar = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setIsDownloadModalOpen(true)}
                 className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:shadow-primary-500/50 transition-all"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -111,7 +114,13 @@ const Navbar = () => {
                   {item}
                 </a>
               ))}
-              <button className="w-full mt-4 bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-3 rounded-lg font-semibold">
+              <button
+                onClick={() => {
+                  setIsDownloadModalOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full mt-4 bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-3 rounded-lg font-semibold"
+              >
                 Download App
               </button>
             </motion.div>
@@ -120,9 +129,15 @@ const Navbar = () => {
       </motion.nav>
 
       {/* Contact Modal */}
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+
+      {/* Download Modal */}
+      <DownloadModal
+        isOpen={isDownloadModalOpen}
+        onClose={() => setIsDownloadModalOpen(false)}
       />
     </>
   );

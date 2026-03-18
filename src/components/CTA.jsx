@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiDownload, FiArrowRight } from 'react-icons/fi';
+import DownloadModal from './DownloadModal';
 
 const CTA = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
 
   return (
+    <>
     <section className="py-20 relative overflow-hidden" ref={ref}>
       {/* Background Effects */}
       <div className="absolute inset-0 z-0">
@@ -36,18 +39,11 @@ const CTA = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setIsDownloadModalOpen(true)}
               className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-2xl transition-all flex items-center justify-center gap-2"
             >
               <FiDownload />
               Download for iOS
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-2xl transition-all flex items-center justify-center gap-2"
-            >
-              <FiDownload />
-              Download for Android
             </motion.button>
           </div>
 
@@ -62,6 +58,12 @@ const CTA = () => {
         </motion.div>
       </div>
     </section>
+
+    <DownloadModal
+      isOpen={isDownloadModalOpen}
+      onClose={() => setIsDownloadModalOpen(false)}
+    />
+    </>
   );
 };
 
